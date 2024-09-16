@@ -166,6 +166,10 @@ main {
   margin-left: 5px;
 }
 
+.pizza-sizes span {
+  opacity: 0.5;
+}
+
 .pizza-toppings {
   display: flex;
   flex-wrap: wrap;

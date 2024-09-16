@@ -1,35 +1,25 @@
 <template>
   <div class="pizza-toppings">
-    <button
-      v-for="(topping, index) in toppings"
-      :key="index"
-      :class="{ active: topping === activeTopping }"
-      :disabled="topping === disabledTopping"
-    >
-      {{ topping }}
-    </button>
+    <div v-for="topping in toppings" :key="topping.id">
+      <PizzaToppingsButton :name="topping.name" :activeTopping="false" :disabledTopping="false" />
+    </div>
   </div>
 </template>
 
-<script setup>
-const props = defineProps({
-  activeTopping: String,
-  disabledTopping: String
-})
+<script setup lang="ts">
+import { PropType } from 'vue'
+import PizzaToppingsButton from './PizzaToppingsButton.vue'
 
-// Example toppings array
-const toppings = [
-  'Avocado',
-  'Broccoli',
-  'Onions',
-  'Zucchini',
-  'Lobster',
-  'Oyster',
-  'Salmon',
-  'Tuna',
-  'Bacoon',
-  'Duck',
-  'Ham',
-  'Sausage'
-]
+interface Topping {
+  id: number
+  name: string
+  price: number
+}
+
+const props = defineProps({
+  toppings: {
+    type: Array as PropType<Topping[]>,
+    required: true
+  }
+})
 </script>

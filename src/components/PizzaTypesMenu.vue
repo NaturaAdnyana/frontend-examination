@@ -1,19 +1,36 @@
 <script setup lang="ts">
 import PizzaTypeButton from '@/components/PizzaTypeButton.vue'
+import { PropType } from 'vue'
+
+interface PizzaType {
+  id: number
+  name: string
+  price: number
+  discount: {
+    is_active: boolean
+    final_price: number
+  }
+  toppings: number[]
+}
+
+const props = defineProps({
+  pizzaTypes: {
+    type: Array as PropType<PizzaType[]>,
+    required: true
+  }
+})
 </script>
 
 <template>
   <div class="pizza-types">
-    <PizzaTypeButton pizzaSrc="Cheese Pizza.png" title="Cheese Pizza" price="$8.00" />
-    <PizzaTypeButton
-      pizzaSrc="Veggie Pizza.png"
-      title="Veggie Pizza"
-      price="$8.50"
-      oldPrice="$10.00"
-      :offer="true"
-    />
-    <PizzaTypeButton pizzaSrc="Classical Pizza.png" title="Classical Pizza" price="$8.00" />
+    <div v-for="type in pizzaTypes" :key="type.id">
+      <PizzaTypeButton
+        :pizzaSrc="`${type.name}.png`"
+        :title="type.name"
+        :price="`$${type.discount.is_active ? type.discount.final_price : type.price}`"
+        :oldPrice="type.discount.is_active ? `$${type.price}` : ''"
+        :offer="type.discount.is_active"
+      />
+    </div>
   </div>
 </template>
-
-<script lang="ts"></script>

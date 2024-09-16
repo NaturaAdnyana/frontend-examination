@@ -5,6 +5,10 @@ import FooterSection from './components/FooterSection.vue'
 import PizzaTypesMenu from './components/PizzaTypesMenu.vue'
 import PizzaSizesMenu from './components/PizzaSizesMenu.vue'
 import PizzaToppingsMenu from './components/PizzaToppingsMenu.vue'
+
+import sizes from './assets/data/json/size-list.json'
+import toppings from './assets/data/json/topping-list.json'
+import pizzaList from './assets/data/json/pizza-list.json'
 </script>
 
 <template>
@@ -16,16 +20,16 @@ import PizzaToppingsMenu from './components/PizzaToppingsMenu.vue'
     <section class="pizza-options">
       <div>
         <h2>Choose your pizza</h2>
-        <PizzaTypesMenu />
+        <PizzaTypesMenu :pizzaTypes="pizzaList.data" />
       </div>
       <div>
         <h2>Custom Pizza</h2>
         <h3>Size</h3>
-        <PizzaSizesMenu />
+        <PizzaSizesMenu :sizes="sizes.data" />
       </div>
       <div>
         <h3>Toppings</h3>
-        <PizzaToppingsMenu />
+        <PizzaToppingsMenu :toppings="toppings.data" />
       </div>
     </section>
     <aside>
